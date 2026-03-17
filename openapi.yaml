@@ -1,0 +1,96 @@
+openapi: 3.1.0
+info:
+  title: Enriquecedor
+  version: 1.0.0
+  description: Enrich bibliographic records with Crossref and OpenAlex.
+servers:
+  - url: https://buscador-n11u.onrender.com
+paths:
+  /health:
+    get:
+      operationId: healthCheckEnrichment
+      summary: Check API health
+      responses:
+        "200":
+          description: API healthy
+  /enrich:
+    post:
+      operationId: enrichLiteratureRecords
+      summary: Enrich records with Crossref and OpenAlex
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - records
+              properties:
+                records:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - record_id
+                    properties:
+                      record_id:
+                        type: string
+                      title:
+                        type: string
+                      authors:
+                        type: array
+                        items:
+                          type: string
+                      year:
+                        type: integer
+                      publication_date:
+                        type: string
+                      journal:
+                        type: string
+                      document_type:
+                        type: string
+                      study_type:
+                        type: string
+                      language:
+                        type: string
+                      abstract:
+                        type: string
+                      pmid:
+                        type: string
+                      pmcid:
+                        type: string
+                      doi:
+                        type: string
+                      keywords:
+                        type: array
+                        items:
+                          type: string
+                      mesh_terms:
+                        type: array
+                        items:
+                          type: string
+                      access_status:
+                        type: string
+                      links:
+                        type: object
+                        additionalProperties:
+                          type: string
+                fill_missing_doi:
+                  type: boolean
+                fill_license:
+                  type: boolean
+                fill_funding:
+                  type: boolean
+                fill_publisher:
+                  type: boolean
+                fill_orcid_ror:
+                  type: boolean
+                fill_citation_metrics:
+                  type: boolean
+                fill_open_access_flags:
+                  type: boolean
+                check_updates_or_retractions:
+                  type: boolean
+      responses:
+        "200":
+          description: Enriched results
