@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: Enrich bibliographic records with Crossref and OpenAlex.
 servers:
-  - url: https://buscador-n11u.onrender.com
+  - url: https://enriquecedor.onrender.com
 paths:
   /health:
     get:
